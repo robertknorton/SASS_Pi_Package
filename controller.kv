@@ -1,0 +1,441 @@
+#:kivy 1.0
+
+#<StartButton>:
+#    name: 'LED Button'
+#    on_release: app.root.StartButton.begin
+#
+#<StopButton>:
+#    name: 'LED Button'
+#
+#<FlowSlider>:
+#    min: 0
+#    max: 100
+#
+#<TempSlider>:
+#    min: 68
+#    max: 110
+
+<Row@BoxLayout>:
+    canvas.before:
+        Color:
+            rgba: 0.5, 0.5, 0.5, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    value: ''
+    Label:
+        text: root.value
+        font_size: 15
+        halign: "left"
+
+
+<Controller>:
+
+    tab_pos: 'top_mid'
+    tab_height: 40
+    tab_width: 265
+    size_hint: 1, 1
+    pos_hint: {'center_x': .5, 'center_y': .5}
+    do_default_tab: False
+    # Controls Tab Object Properties
+    sys_clock: sys_clock
+    timer_clock: timer_clock
+    start_button: start_button
+    stop_button: stop_button
+    reset_button: reset_button
+    proximity_switch: proximity_switch
+    flow_slider: flow_slider
+    temp_slider: temp_slider
+    water_temp_label: water_temp_label
+    water_flow_label: water_flow_label
+    water_temp_avg_label: water_temp_avg_label
+    water_total_label: water_total_label
+
+    # Logs Tab Object Properties
+    sort_drop_down: sort_drop_down
+    sort_up_down: sort_up_down
+    rv: rv
+
+    # Sys Tab Object Properties
+#    restartButton: restartButton
+
+    TabbedPanelItem:
+        text: 'Controls'
+        font_size: 20
+
+        BoxLayout:
+            spacing: 10
+            size_hint: 1, 1
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            pos: 0,0
+
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    size_hint: (1,0.1)
+                    font_size: 25
+                    text: 'Temperature Setting'
+                    valign: 'top'
+                    halign: 'center'
+
+                Label:
+                    size_hint: (1,0.1)
+                    padding: 0,20
+                    font_size: 40
+                    text: str(int(temp_slider.value)) + u'\N{DEGREE SIGN}F'
+                    valign: 'top'
+                    halign: 'center'
+
+                TempSlider:
+                    id: temp_slider
+                    size_hint: (1,0.9)
+                    orientation: 'vertical'
+                    sensitivity: 'all'
+                    valign: 'middle'
+                    halign: 'center'
+                    background_width: 80
+                    cursor_size: (40,40)
+                    min: 68
+                    max: 110
+
+            BoxLayout:
+                orientation: 'vertical'
+
+                Label:
+                    id: sys_clock
+                    size_hint: (1,0.15)
+                    font_size: 40
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: (1,0.1)
+
+                    Label:
+                        text: 'Timer:'
+                        pos_hint: {'center_x': .75, 'center_y': .5}
+                        font_size: 25
+                        size_hint: (0.4,1)
+
+#                    TimerClock:
+#                        id: timer_clock
+#                        text: '00:00'
+#                        size_hint: (1,0.8)
+#                        pos_hint: {'center_x': .25, 'center_y': .5}
+#                        font_size: 30
+                    Label:
+                        id: timer_clock
+                        text: '00:00'
+                        size_hint: (1,0.8)
+                        pos_hint: {'center_x': .25, 'center_y': .5}
+                        font_size: 30
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: (1,0.2)
+
+#                    StartButton:
+#                        id: start_button
+#                        text: "Start"
+#                        font_size: 20
+#                        size_hint: (1,0.8)
+                    Button:
+                        id: start_button
+                        text: "Start"
+                        font_size: 20
+                        size_hint: (1,0.8)
+                        on_press: root.startShower()
+#                    StopButton:
+#                        id: stop_button
+#                        text: "Stop"
+#                        font_size: 20
+#                        size_hint: (1,0.8)
+                    Button:
+                        id: stop_button
+                        text: "Stop"
+                        font_size: 20
+                        size_hint: (1,0.8)
+                        on_press: root.stopShower()
+#                    ResetButton:
+#                        id: reset_button
+#                        text: "Reset"
+#                        font_size: 20
+#                        size_hint: (1,0.8)
+                    Button:
+                        id: reset_button
+                        text: "Reset"
+                        font_size: 20
+                        size_hint: (1,0.8)
+                        on_press: root.resetShower()
+
+                Label:
+                    text: 'Sensor Readings'
+                    font_size: 25
+                    size_hint: (1,0.15)
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: (1,0.3)
+
+
+                    BoxLayout:
+                        orientation: 'vertical'
+                        Label:
+                            text: 'Water Temp'
+                            font_size: 20
+                            text_size: self.size
+                            halign: 'center'
+                            valign: 'middle'
+                        WaterTempLabel:
+                            id: water_temp_label
+                            font_size: 25
+                            text_size: self.size
+                            halign: 'center'
+                            valign: 'middle'
+
+                    BoxLayout:
+                        orientation: 'vertical'
+                        Label:
+                            text: 'Water Flow'
+                            font_size: 20
+                            text_size: self.size
+                            halign: 'center'
+                            valign: 'middle'
+                        WaterFlowLabel:
+                            id: water_flow_label
+                            font_size: 25
+                            text_size: self.size
+                            halign: 'center'
+                            valign: 'middle'
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: (1,0.3)
+
+
+                    BoxLayout:
+                        orientation: 'vertical'
+                        Label:
+                            text: 'Avg Water'
+                            font_size: 20
+                            text_size: self.size
+                            halign: 'center'
+                            valign: 'middle'
+                        WaterTempAvgLabel:
+                            id: water_temp_avg_label
+                            font_size: 25
+                            text_size: self.size
+                            halign: 'center'
+                            valign: 'middle'
+
+                    BoxLayout:
+                        orientation: 'vertical'
+                        Label:
+                            text: 'Total Water'
+                            font_size: 20
+                            text_size: self.size
+                            halign: 'center'
+                            valign: 'middle'
+                        WaterTotalLabel:
+                            id: water_total_label
+                            font_size: 25
+                            text_size: self.size
+                            halign: 'center'
+                            valign: 'middle'
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: (1,0.2)
+
+                    Label:
+                        text: "Prox. Flow Control"
+                        font_size: 20
+                        height: self.texture_size[1]
+
+                    ProximitySwitch:
+                        id: proximity_switch
+                        font_size: 25
+                        size_hint: 0.4,1
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: (1,0.2)
+                    Label:
+                        text: "Auto Warm Up"
+                        font_size: 20
+                        height: self.texture_size[1]
+                    Switch:
+                        font_size: 25
+                        size_hint: 0.4,1
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    size_hint: (1,0.1)
+                    font_size: 25
+                    text: 'Water Flow Setting'
+                    valign: 'top'
+                    halign: 'center'
+
+                Label:
+                    size_hint: (1,0.1)
+                    padding: 0,20
+                    font_size: 40
+                    text: str(int(flow_slider.value)) + '%'
+                    valign: 'top'
+                    halign: 'center'
+
+                FlowSlider:
+                    id: flow_slider
+                    size_hint: (1,0.9)
+                    orientation: 'vertical'
+                    sensitivity: 'all'
+                    background_width: 80
+                    cursor_size: (40,40)
+                    valign: 'middle'
+                    halign: 'center'
+    TabbedPanelItem:
+        text: 'Programs'
+        font_size: 20
+
+        BoxLayout:
+            orientation: 'vertical'
+            Label:
+                text: 'Programs Tab'
+    TabbedPanelItem:
+        text: 'Logs'
+        font_size: 20
+        BoxLayout:
+            orientation: 'vertical'
+            padding: dp(8)
+            spacing: dp(16)
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: (1,0.1)
+                Spinner:
+                    id: sort_drop_down
+                    text: 'Sort Type'
+                    values: ('Date','Start Time','End Time','Total Time On','Avg Water Temp','Most Water Used')
+                    size_hint: (0.5,1)
+                Spinner:
+                    id: sort_up_down
+                    text: 'Ascending'
+                    values: ('Ascending','Descending')
+                    size_hint: (0.5,1)
+                Button:
+                    text: 'Sort'
+                    on_press: root.sortLog(root.sort_drop_down.text, root.sort_up_down.text)
+                Button:
+                    text: 'Clear list'
+                    on_press: root.clear()
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: (1,0.1)
+                BoxLayout:
+                    orientation: 'horizontal'
+#                    size_hint: (0.1,1)
+                    padding: dp(2)
+                    spacing: dp(6)
+                    Label:
+                        text: "Shower Date"
+                        canvas.before:
+                            Color:
+                                rgba: 0.45, 0.45, 0.45, 1
+                            Rectangle:
+                                size: self.size
+                                pos: self.pos
+                BoxLayout:
+                    orientation: 'horizontal'
+#                    size_hint: (0.1,1)
+                    padding: dp(2)
+                    spacing: dp(5)
+                    Label:
+                        text: "Start Time"
+                        canvas.before:
+                            Color:
+                                rgba: 0.45, 0.45, 0.45, 1
+                            Rectangle:
+                                size: self.size
+                                pos: self.pos
+                BoxLayout:
+                    orientation: 'horizontal'
+#                    size_hint: (0.1,1)
+                    padding: dp(2)
+                    spacing: dp(5)
+                    Label:
+                        text: "End Time"
+                        canvas.before:
+                            Color:
+                                rgba: 0.45, 0.45, 0.45, 1
+                            Rectangle:
+                                size: self.size
+                                pos: self.pos
+                BoxLayout:
+                    orientation: 'horizontal'
+#                    size_hint: (0.1,1)
+                    padding: dp(2)
+                    spacing: dp(5)
+                    Label:
+                        text: "Total Time On"
+                        canvas.before:
+                            Color:
+                                rgba: 0.45, 0.45, 0.45, 1
+                            Rectangle:
+                                size: self.size
+                                pos: self.pos
+                BoxLayout:
+                    orientation: 'horizontal'
+#                    size_hint: (0.1,1)
+                    padding: dp(2)
+                    spacing: dp(5)
+                    Label:
+                        text: "Avg Water Temp"
+                        canvas.before:
+                            Color:
+                                rgba: 0.45, 0.45, 0.45, 1
+                            Rectangle:
+                                size: self.size
+                                pos: self.pos
+                BoxLayout:
+                    orientation: 'horizontal'
+#                    size_hint: (0.1,1)
+                    padding: dp(2)
+                    spacing: dp(5)
+                    Label:
+                        text: "Total Water Used"
+                        canvas.before:
+                            Color:
+                                rgba: 0.45, 0.45, 0.45, 1
+                            Rectangle:
+                                size: self.size
+                                pos: self.pos
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: (1,0.8)
+
+                RecycleView:
+                    id: rv
+                    scroll_type: ['bars', 'content']
+                    scroll_wheel_distance: dp(114)
+                    bar_width: dp(10)
+                    viewclass: 'Row'
+                    RecycleGridLayout:
+                        default_size: None, dp(40)
+                        default_size_hint: 1, None
+                        size_hint_y: None
+                        height: self.minimum_height
+                        orientation: 'vertical'
+                        spacing: dp(2)
+                        cols: 6
+    TabbedPanelItem:
+        text: 'Sys'
+        font_size: 20
+
+        BoxLayout:
+            orientation: 'vertical'
+            Button:
+#                id: restartButton
+                text: 'Restart Program'
+                on_release: root.restartProgram()
+            Button:
+                text: 'Reboot System'
+                on_release: root.rebootSystem()
+            Button:
+                text: 'Shutdown System'
+                on_release: root.shutdownSystem()
