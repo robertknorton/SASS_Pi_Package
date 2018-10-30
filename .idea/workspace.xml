@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="52d748a6-10a3-4216-b985-5e05598418d5" name="Default Changelist" comment="" />
+    <list default="true" id="52d748a6-10a3-4216-b985-5e05598418d5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,10 +57,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="439">
-              <caret line="286" column="36" lean-forward="true" selection-start-line="286" selection-start-column="36" selection-end-line="286" selection-end-column="36" />
+            <state relative-caret-position="677">
+              <caret line="303" column="23" lean-forward="true" selection-start-line="303" selection-start-column="23" selection-end-line="303" selection-end-column="23" />
               <folding>
                 <element signature="e#19#28#0" expanded="true" />
+                <element signature="e#10642#10664#0" />
                 <marker date="1540867359760" expanded="true" signature="2140:2141" ph="..." />
                 <marker date="1540867359760" expanded="true" signature="3549:3561" ph="..." />
                 <marker date="1540867359760" expanded="true" signature="4269:4271" ph="..." />
@@ -109,6 +113,9 @@
       <find>Controller</find>
     </findStrings>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/main.py" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -126,6 +133,7 @@
     <option name="width" value="1941" />
     <option name="height" value="2124" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -251,10 +259,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="286" column="36" lean-forward="true" selection-start-line="286" selection-start-column="36" selection-end-line="286" selection-end-column="36" />
+        <state relative-caret-position="677">
+          <caret line="303" column="23" lean-forward="true" selection-start-line="303" selection-start-column="23" selection-end-line="303" selection-end-column="23" />
           <folding>
             <element signature="e#19#28#0" expanded="true" />
+            <element signature="e#10642#10664#0" />
             <marker date="1540867359760" expanded="true" signature="2140:2141" ph="..." />
             <marker date="1540867359760" expanded="true" signature="3549:3561" ph="..." />
             <marker date="1540867359760" expanded="true" signature="4269:4271" ph="..." />
