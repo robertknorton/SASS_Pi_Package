@@ -281,19 +281,17 @@ class Controller(TabbedPanel):
                 self.water_total_label.update(self.FLT)
 
     def send_input(self, *args):
-        print(self.auto_warm_cool_switch.active)
-        print(Controller.TS)
-        print(self.WT)
-        if (self.auto_warm_cool_switch.active == True) and (self.STV == 1):
-            if int(Controller.TS) == int(self.WT):
-                print("B")
-                self.STV = 0
-                Controller.FS = 0
+        # print(self.auto_warm_cool_switch.active)
+        # print(Controller.TS)
+        # print(self.WT)
+        if (self.auto_warm_cool_switch.active == True) and (self.STV == 1): # if shower is on and the auto switch is active
+            if int(Controller.TS) == int(self.WT): # if the set temp and actual measured temp are equal do...
+                self.STV = 0 # turn off system
+                Controller.FS = 0 # set water flow to 0
                 self.flow_slider.value = Controller.FS  # updates GUI slider widget
-                self.auto_warm_cool_switch.active = False
+                self.auto_warm_cool_switch.active = False # turn auto switch to False(off)
             else:
-                Controller.FS = 100
-                print("A")
+                Controller.FS = 100 # Open valve completely to allow water to flow and temperature to change
                 self.flow_slider.value = Controller.FS  # updates GUI slider widget
 
         elif (self.proximity_switch.active == True) and (self.STV == 1): # only runs proximity sensor when system on
