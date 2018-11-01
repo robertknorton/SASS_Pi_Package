@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="52d748a6-10a3-4216-b985-5e05598418d5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller.kv" beforeDir="false" afterPath="$PROJECT_DIR$/controller.kv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,26 +16,26 @@
     <session id="-995819046">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="6" />
+          <entry key="project.closed" value="7" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.3" value="8" />
-          <entry key="project.open.time.4" value="3" />
-          <entry key="project.opened" value="14" />
+          <entry key="project.open.time.4" value="4" />
+          <entry key="project.opened" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="kv" value="4869" />
-          <entry key="py" value="14248" />
+          <entry key="kv" value="5138" />
+          <entry key="py" value="14606" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Kivy" value="3347" />
+          <entry key="Kivy" value="3616" />
           <entry key="PLAIN_TEXT" value="1522" />
-          <entry key="Python" value="14248" />
+          <entry key="Python" value="14606" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -57,21 +58,21 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="677">
-              <caret line="303" column="23" lean-forward="true" selection-start-line="303" selection-start-column="23" selection-end-line="303" selection-end-column="23" />
+            <state relative-caret-position="238">
+              <caret line="271" column="41" lean-forward="true" selection-start-line="271" selection-start-column="41" selection-end-line="271" selection-end-column="41" />
               <folding>
                 <element signature="e#19#28#0" expanded="true" />
                 <element signature="e#10642#10664#0" />
-                <marker date="1540867359760" expanded="true" signature="2140:2141" ph="..." />
-                <marker date="1540867359760" expanded="true" signature="3549:3561" ph="..." />
-                <marker date="1540867359760" expanded="true" signature="4269:4271" ph="..." />
-                <marker date="1540867359760" expanded="true" signature="4582:4589" ph="..." />
-                <marker date="1540867359760" expanded="true" signature="4613:5626" ph="..." />
-                <marker date="1540867359760" expanded="true" signature="5684:6211" ph="..." />
-                <marker date="1540867359760" expanded="true" signature="5717:5728" ph="..." />
-                <marker date="1540867359760" expanded="true" signature="8633:8639" ph="..." />
-                <marker date="1540867359760" expanded="true" signature="11046:11052" ph="..." />
-                <marker date="1540867359760" expanded="true" signature="16191:16200" ph="..." />
+                <marker date="1541041830775" expanded="true" signature="2140:2141" ph="..." />
+                <marker date="1541041830775" expanded="true" signature="3549:3600" ph="..." />
+                <marker date="1541041830775" expanded="true" signature="4308:4310" ph="..." />
+                <marker date="1541041830775" expanded="true" signature="4621:4628" ph="..." />
+                <marker date="1541041830775" expanded="true" signature="4652:5665" ph="..." />
+                <marker date="1541041830775" expanded="true" signature="5723:6250" ph="..." />
+                <marker date="1541041830775" expanded="true" signature="5756:5767" ph="..." />
+                <marker date="1541041830775" expanded="true" signature="8717:8723" ph="..." />
+                <marker date="1541041830775" expanded="true" signature="11714:11720" ph="..." />
+                <marker date="1541041830775" expanded="true" signature="16859:16868" ph="..." />
               </folding>
             </state>
           </provider>
@@ -89,8 +90,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controller.kv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="288" column="40" lean-forward="true" selection-start-line="288" selection-start-column="40" selection-end-line="288" selection-end-column="40" />
+            <state relative-caret-position="4165">
+              <caret line="245" lean-forward="true" selection-start-line="245" selection-end-line="245" />
             </state>
           </provider>
         </entry>
@@ -123,14 +124,14 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/start_sass.py" />
-        <option value="$PROJECT_DIR$/controller.kv" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/controller.kv" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-12" />
-    <option name="width" value="1941" />
+    <option name="x" value="-11" />
+    <option name="width" value="1940" />
     <option name="height" value="2124" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -139,7 +140,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -151,6 +151,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -210,10 +211,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="0" width="1294" height="1416" extended-state="0" />
+    <frame x="-7" y="0" width="1293" height="1416" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17422435" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17436306" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -243,6 +244,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/controller.kv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4165">
+          <caret line="245" lean-forward="true" selection-start-line="245" selection-end-line="245" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/start_sass.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -250,30 +258,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controller.kv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="288" column="40" lean-forward="true" selection-start-line="288" selection-start-column="40" selection-end-line="288" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="677">
-          <caret line="303" column="23" lean-forward="true" selection-start-line="303" selection-start-column="23" selection-end-line="303" selection-end-column="23" />
+        <state relative-caret-position="238">
+          <caret line="271" column="41" lean-forward="true" selection-start-line="271" selection-start-column="41" selection-end-line="271" selection-end-column="41" />
           <folding>
             <element signature="e#19#28#0" expanded="true" />
             <element signature="e#10642#10664#0" />
-            <marker date="1540867359760" expanded="true" signature="2140:2141" ph="..." />
-            <marker date="1540867359760" expanded="true" signature="3549:3561" ph="..." />
-            <marker date="1540867359760" expanded="true" signature="4269:4271" ph="..." />
-            <marker date="1540867359760" expanded="true" signature="4582:4589" ph="..." />
-            <marker date="1540867359760" expanded="true" signature="4613:5626" ph="..." />
-            <marker date="1540867359760" expanded="true" signature="5684:6211" ph="..." />
-            <marker date="1540867359760" expanded="true" signature="5717:5728" ph="..." />
-            <marker date="1540867359760" expanded="true" signature="8633:8639" ph="..." />
-            <marker date="1540867359760" expanded="true" signature="11046:11052" ph="..." />
-            <marker date="1540867359760" expanded="true" signature="16191:16200" ph="..." />
+            <marker date="1541041830775" expanded="true" signature="2140:2141" ph="..." />
+            <marker date="1541041830775" expanded="true" signature="3549:3600" ph="..." />
+            <marker date="1541041830775" expanded="true" signature="4308:4310" ph="..." />
+            <marker date="1541041830775" expanded="true" signature="4621:4628" ph="..." />
+            <marker date="1541041830775" expanded="true" signature="4652:5665" ph="..." />
+            <marker date="1541041830775" expanded="true" signature="5723:6250" ph="..." />
+            <marker date="1541041830775" expanded="true" signature="5756:5767" ph="..." />
+            <marker date="1541041830775" expanded="true" signature="8717:8723" ph="..." />
+            <marker date="1541041830775" expanded="true" signature="11714:11720" ph="..." />
+            <marker date="1541041830775" expanded="true" signature="16859:16868" ph="..." />
           </folding>
         </state>
       </provider>

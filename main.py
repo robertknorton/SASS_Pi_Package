@@ -102,6 +102,8 @@ def checkCPU(*args):
 class ProximitySwitch(Switch):
     pass
 
+class AutoWarmSwitch(Switch):
+    pass
 
 class FlowSlider(Slider):
     def on_touch_up(self, touch):
@@ -176,6 +178,7 @@ class Controller(TabbedPanel):
     stop_button = ObjectProperty()
     reset_button = ObjectProperty()
     proximity_switch = ObjectProperty()
+    auto_warm_cool_switch = ObjectProperty()
     flow_slider = ObjectProperty()
     temp_slider = ObjectProperty()
     water_temp_label = ObjectProperty()
@@ -263,7 +266,7 @@ class Controller(TabbedPanel):
                 tempData1 = serial_line[:-1] # trim last }
                 tempData2 = tempData1[1:] # trim first {
                 parsedData = tempData2.split(',') # parse the data values
-                # print(parsedData)
+                print(parsedData)
                 # Update variables
                 self.WT = int(parsedData[0])
                 self.WTA = int(parsedData[1])
@@ -278,8 +281,22 @@ class Controller(TabbedPanel):
                 self.water_total_label.update(self.FLT)
 
     def send_input(self, *args):
-        # print(self.proximity_switch.active)
-        if (self.proximity_switch.active == True) and self.STV == 1: # only runs proximity sensor when system on
+        print(self.auto_warm_cool_switch.active)
+        print(Controller.TS)
+        print(self.WT)
+        if (self.auto_warm_cool_switch.active == True) and (self.STV == 1):
+            if int(Controller.TS) == int(self.WT):
+                print("B")
+                self.STV = 0
+                Controller.FS = 0
+                self.flow_slider.value = Controller.FS  # updates GUI slider widget
+                self.auto_warm_cool_switch.active = False
+            else:
+                Controller.FS = 100
+                print("A")
+                self.flow_slider.value = Controller.FS  # updates GUI slider widget
+
+        elif (self.proximity_switch.active == True) and (self.STV == 1): # only runs proximity sensor when system on
             if int(self.PRX) < 15:
                 Controller.FS = 100
             elif int(self.PRX) < 20:
@@ -301,7 +318,7 @@ class Controller(TabbedPanel):
         # print(type(Controller.FS))
         # print(Controller.FS)
         newInput = str("<"+str(self.STV)+","+str(self.BPV)+","+str(self.RST)+","+str(round(newFS))+","+str(round(newTS))+">")
-        print(newInput)
+        # print(newInput)
         board.write(newInput.encode())
         self.sendInputs = False
         self.RST = 0
