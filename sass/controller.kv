@@ -1,20 +1,5 @@
 #:kivy 1.0
 
-#<StartButton>:
-#    name: 'LED Button'
-#    on_release: app.root.StartButton.begin
-#
-#<StopButton>:
-#    name: 'LED Button'
-#
-#<FlowSlider>:
-#    min: 0
-#    max: 100
-#
-#<TempSlider>:
-#    min: 68
-#    max: 110
-
 <Row@BoxLayout>:
     canvas.before:
         Color:
@@ -44,6 +29,7 @@
     stop_button: stop_button
     reset_button: reset_button
     proximity_switch: proximity_switch
+    auto_warm_cool_switch: auto_warm_cool_switch
     flow_slider: flow_slider
     temp_slider: temp_slider
     water_temp_label: water_temp_label
@@ -69,11 +55,19 @@
             pos_hint: {'center_x': .5, 'center_y': .5}
             pos: 0,0
 
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
             BoxLayout:
                 orientation: 'vertical'
+                size_hint: (0.75,1)
                 Label:
                     size_hint: (1,0.1)
-                    font_size: 25
+                    font_size: 20
                     text: 'Temperature Setting'
                     valign: 'top'
                     halign: 'center'
@@ -100,7 +94,7 @@
 
             BoxLayout:
                 orientation: 'vertical'
-
+                size_hint: (1,1)
                 Label:
                     id: sys_clock
                     size_hint: (1,0.15)
@@ -112,8 +106,11 @@
 
                     Label:
                         text: 'Timer:'
-                        pos_hint: {'center_x': .75, 'center_y': .5}
-                        font_size: 25
+                        size_hint: (0.5,1)
+                        halign: 'right'
+                        valign: 'middle'
+                        text_size: self.size
+                        font_size: 30
                         size_hint: (0.4,1)
 
 #                    TimerClock:
@@ -125,8 +122,10 @@
                     Label:
                         id: timer_clock
                         text: '00:00'
-                        size_hint: (1,0.8)
-                        pos_hint: {'center_x': .25, 'center_y': .5}
+                        size_hint: (0.5,0.8)
+                        halign: 'center'
+                        valign: 'middle'
+                        text_size: self.size
                         font_size: 30
 
                 BoxLayout:
@@ -141,7 +140,7 @@
                     Button:
                         id: start_button
                         text: "Start"
-                        font_size: 20
+                        font_size: 25
                         size_hint: (1,0.8)
                         on_press: root.startShower()
 #                    StopButton:
@@ -152,7 +151,7 @@
                     Button:
                         id: stop_button
                         text: "Stop"
-                        font_size: 20
+                        font_size: 25
                         size_hint: (1,0.8)
                         on_press: root.stopShower()
 #                    ResetButton:
@@ -163,7 +162,7 @@
                     Button:
                         id: reset_button
                         text: "Reset"
-                        font_size: 20
+                        font_size: 25
                         size_hint: (1,0.8)
                         on_press: root.resetShower()
 
@@ -187,7 +186,7 @@
                             valign: 'middle'
                         WaterTempLabel:
                             id: water_temp_label
-                            font_size: 25
+                            font_size: 30
                             text_size: self.size
                             halign: 'center'
                             valign: 'middle'
@@ -202,7 +201,7 @@
                             valign: 'middle'
                         WaterFlowLabel:
                             id: water_flow_label
-                            font_size: 25
+                            font_size: 30
                             text_size: self.size
                             halign: 'center'
                             valign: 'middle'
@@ -222,7 +221,7 @@
                             valign: 'middle'
                         WaterTempAvgLabel:
                             id: water_temp_avg_label
-                            font_size: 25
+                            font_size: 30
                             text_size: self.size
                             halign: 'center'
                             valign: 'middle'
@@ -237,7 +236,7 @@
                             valign: 'middle'
                         WaterTotalLabel:
                             id: water_total_label
-                            font_size: 25
+                            font_size: 30
                             text_size: self.size
                             halign: 'center'
                             valign: 'middle'
@@ -247,9 +246,8 @@
 
                     Label:
                         text: "Prox. Flow Control"
-                        font_size: 20
+                        font_size: 25
                         height: self.texture_size[1]
-
                     ProximitySwitch:
                         id: proximity_switch
                         font_size: 25
@@ -258,21 +256,22 @@
                     orientation: 'horizontal'
                     size_hint: (1,0.2)
                     Label:
-                        text: "Auto Warm Up"
-                        font_size: 20
+                        text: "Auto Warm/Cool"
+                        font_size: 25
                         height: self.texture_size[1]
-                    Switch:
+                    AutoWarmSwitch:
+                        id: auto_warm_cool_switch
                         font_size: 25
                         size_hint: 0.4,1
             BoxLayout:
                 orientation: 'vertical'
+                size_hint: (0.75,1)
                 Label:
                     size_hint: (1,0.1)
-                    font_size: 25
+                    font_size: 30
                     text: 'Water Flow Setting'
                     valign: 'top'
                     halign: 'center'
-
                 Label:
                     size_hint: (1,0.1)
                     padding: 0,20
@@ -280,7 +279,6 @@
                     text: str(int(flow_slider.value)) + '%'
                     valign: 'top'
                     halign: 'center'
-
                 FlowSlider:
                     id: flow_slider
                     size_hint: (1,0.9)
