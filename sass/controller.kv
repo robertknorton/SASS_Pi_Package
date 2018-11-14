@@ -290,14 +290,14 @@
                     cursor_size: (40,40)
                     valign: 'middle'
                     halign: 'center'
-    TabbedPanelItem:
-        text: 'Programs'
-        font_size: 20
-
-        BoxLayout:
-            orientation: 'vertical'
-            Label:
-                text: 'Programs Tab'
+#    TabbedPanelItem:
+#        text: 'Programs'
+#        font_size: 20
+#
+#        BoxLayout:
+#            orientation: 'vertical'
+#            Label:
+#                text: 'Programs Tab'
     TabbedPanelItem:
         text: 'Logs'
         font_size: 20
@@ -324,6 +324,9 @@
                 Button:
                     text: 'Clear list'
                     on_press: root.clear()
+                Button:
+                    text: 'Per Day Data'
+#                    on_press: root.clear()
             BoxLayout:
                 orientation: 'horizontal'
                 size_hint: (1,0.1)

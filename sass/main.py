@@ -15,6 +15,9 @@ from kivy.uix.switch import Switch
 from kivy.uix.treeview import TreeView, TreeViewLabel, TreeViewNode
 from kivy.config import Config
 
+import sqlite3
+from sqlite3 import Error
+
 import serial as ser
 import string
 import time
@@ -66,6 +69,61 @@ def checkCPU(*args):
        result.append(int(load))
     print(result)
 
+#--------------Data base functions-----------------
+
+def connect_database(name, *args):
+    try:
+        conn = sqlite3.connect(name)
+    except sqlite3.DatabaseError as e:
+        raise e
+    else:
+        print('DB Connection Established')
+        return conn
+
+def create_table(conn, *args):
+    cur = conn.cursor()
+    try:
+        cur.execute('CREATE TABLE IF NOT EXISTS Shower('
+                    '"Shower Date"    Text PRIMARY KEY NOT NULL,'  # Storing shower time and day
+                    '"Start Time"     Text NOT NULL,'
+                    '"End Time"       Text NOT NULL,'
+                    '"Total Time On"  Text NOT NULL,'
+                    '"AVG Water Temp" Text NOT NULL,'
+                    '"Total Water Used" Text NOT NULL)')
+    except Error as e:
+        conn.rollback()
+        raise e
+
+def insert_table(conn, content):
+    try:
+        cur = conn.cursor()
+        cur.execute("insert into Shower VALUES (?,?,?,?,?,?)", content)
+    except sqlite3.DatabaseError as e:
+        conn.rollback()
+        raise e
+    else:
+        conn.commit()
+
+def select_query(conn):
+    try:
+        cur = conn.cursor()
+        cur.execute("SELECT * From Shower")
+    except Error as e:
+        raise e
+    else:
+        return cur.fetchall()
+
+def close_conn(dbconn):
+    try:
+        dbconn.commit()
+    except Error as e:
+        dbconn.rollback()
+        raise e
+    finally:
+        print('Database has been closed')
+        dbconn.close()
+
+#--------------------------------------------------
 
 #=======================================================================================================================
 
@@ -249,12 +307,21 @@ class Controller(TabbedPanel):
         self.shower_time_end = 0
         self.shower_time_total = 0
         self.eventData = []
+        # self.contEventTime = [] # this is a list of time marker readings
+        # self.contEventTemp = [] # this is a list of water temp readings
+        # self.contEventWater = [] # this is a list of total water used readings
 
 
     # def update(self, *args):
     #     self.read_sensors()
     #     if self.sendInputs == True:
     #         self.send_input()
+
+    # def update_cont_vars(self, *args):
+    #     self.contEventTime.append(self.timer_clock.text)
+    #     self.contEventTemp.append(self.WT)
+    #     self.contEventWater.append(self.FLT)
+
 
     def read_sensors(self, *args):
         serial_line = board.readline().rstrip().decode()
@@ -345,11 +412,12 @@ class Controller(TabbedPanel):
         if self.STV != 1:
             self.shower_time_end = datetime.now()
             self.insert() # this inserts a shower event data entry
+
             self.RST = 1
             self.STV = 0
             self.FS = 0
-            self.timer_initial = 0 # resets value for next shower
-            self.timer_total = 0 # resets vale for next shower
+            self.timer_initial = 0  # resets value for next shower
+            self.timer_total = 0    # resets vale for next shower
             self.WT = 0  # water temp
             self.WTA = 0  # water temp avg
             self.FL = 0  # water flow
@@ -397,10 +465,17 @@ class Controller(TabbedPanel):
 
 
     def insert(self):
-        st = ('%02d:%02d:%02d'%(self.shower_time_start.hour,self.shower_time_start.minute,self.shower_time_start.second))
-        et = ('%02d:%02d:%02d'%(self.shower_time_end.hour,self.shower_time_end.minute, self.shower_time_end.second))
-        self.eventData.append((str(self.shower_time_start.date()),str(st),str(et),str(self.shower_time_total),str(self.WTA),str(self.FLT)))
-        self.rv.data = [{'value': y} for x in self.eventData for y in x]
+
+        if (self.shower_time_start != 0):
+            st = ('%02d:%02d:%02d' % (self.shower_time_start.hour, self.shower_time_start.minute, self.shower_time_start.second))
+            et = ('%02d:%02d:%02d' % (self.shower_time_end.hour, self.shower_time_end.minute, self.shower_time_end.second))
+            self.eventData.append((str(self.shower_time_start.date()), str(st), str(et), str(self.shower_time_total),str(self.WTA), str(self.FLT)))
+            self.rv.data = [{'value': y} for x in self.eventData for y in x]
+
+            Db = connect_database('SASS.db')
+            insert_table(Db, (str(self.shower_time_start),str(st),str(et),str(self.shower_time_total),str(self.WTA),str(self.FLT)))
+            close_conn(Db)
+            self.shower_time_start = 0 # to make sure it doesnt try to upload to data base again
 
     def update(self, value):
         if self.rv.data:
