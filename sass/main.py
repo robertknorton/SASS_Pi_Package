@@ -487,9 +487,10 @@ class Controller(TabbedPanel):
             self.eventData.append((str(self.shower_time_start.date()), str(st), str(et), str(self.shower_time_total),str(self.WTA), str(self.FLT)))
             self.rv.data = [{'value': y} for x in self.eventData for y in x]
 
-            Db = connect_database('SASS.db')
+            Db = connect_database('SASS.db') # connect to the database
+            # saves the data to the database
             insert_table(Db, (str(self.shower_time_start),str(st),str(et),str(self.shower_time_total),str(self.WTA),str(self.FLT)))
-            close_conn(Db)
+            close_conn(Db) # close the database connection
             self.shower_time_start = 0 # to make sure it doesnt try to upload to data base again
 
     def update(self, value):
