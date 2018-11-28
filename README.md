@@ -16,7 +16,6 @@ System requirements to run this code.
 
 Python 3.5.3 - Used to write the main GUI and logic code for SASS
     Command messages to be sent to Arduino and main logic methods were written in Python.
-    
     Kivy, a proprietary markup language, was used to develop the Graphical User Interface
 
     Python Packages Installed
