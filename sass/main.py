@@ -1,4 +1,9 @@
 #!/usr/bin/python3
+
+# Author: Robert Norton
+# Project: Senior Design Project: Smart Automated Shower System (SASS)
+# Date Last Updated: 11/27/2018
+
 import os
 import sys
 import kivy
@@ -253,7 +258,7 @@ class Controller(TabbedPanel):
 
     # Control Variables
     STV = 0
-    BPV = 0
+    BPV = 1
     RST = 0
     FS = 0
     TS = 68
@@ -288,7 +293,7 @@ class Controller(TabbedPanel):
 
         # Control Variables
         self.STV = 0
-        self.BPV = 0
+        self.BPV = 1
         self.RST = 0
         self.FS = 0
         self.TS = 68
@@ -411,6 +416,7 @@ class Controller(TabbedPanel):
 
     def startShower(self):
         self.STV = 1
+        self.BPV = 0
         if self.timer_initial == 0:
             self.timer_initial = datetime.now() # sets initial interval time
             self.shower_time_start = datetime.now() # save the start time
@@ -419,6 +425,7 @@ class Controller(TabbedPanel):
 
     def stopShower(self):
         self.STV = 0
+        self.BPV = 1
         # print(Controller.FS)
         self.FS = 0
         # print(Controller.FS)
@@ -430,6 +437,7 @@ class Controller(TabbedPanel):
 
             self.RST = 1
             self.STV = 0
+            self.BPV = 1
             self.FS = 0
             self.timer_initial = 0  # resets value for next shower
             self.timer_total = 0    # resets vale for next shower
