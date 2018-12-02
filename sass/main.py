@@ -169,12 +169,12 @@ class AutoWarmSwitch(Switch):
     pass
 
 class FlowSlider(Slider):
-    def on_touch_up(self, touch):
+    def on_touch_up(self, *args):
         Controller.FS = round(self.value,2)
         # print(Controller.FS)
 
 class TempSlider(Slider):
-    def on_touch_up(self, touch):
+    def on_touch_up(self, *args):
         Controller.TS = round(self.value,2)
         # print(Controller.TS)
 
@@ -382,13 +382,62 @@ class Controller(TabbedPanel):
             self.flow_slider.value = Controller.FS
 
         newFS = translate(Controller.FS,0,100,0,100) # make sure this is getting Controller.FS or it will not work
-        newTS = translate(Controller.TS, 68,110,0,100) # make sure this is getting Controller.TS or it will not work
+        # newTS = translate(Controller.TS, 68,110,0,100) # make sure this is getting Controller.TS or it will not work
         # print(type(self.FS))
         # print(self.FS)
         # print(type(Controller.FS))
         # print(Controller.FS)
-        newInput = str("<"+str(self.STV)+","+str(self.BPV)+","+str(self.RST)+","+str(round(newFS))+","+str(round(newTS))+">")
-        # print(newInput)
+
+        tempMap = {110: 550,  # good
+                   109: 590,  # good
+                   108: 630,  # good
+                   107: 680,  # good
+                   106: 730,  # good
+                   105: 770,  # good
+                   104: 800,  # good
+                   103: 850,  # good
+                   102: 960,  # good
+                   101: 980,  # good
+                   100: 1000, # good
+                   99: 1070,  # good
+                   98: 1110,  # good
+                   97: 1150,
+                   96: 1210,  # good
+                   95: 1240,  # good
+                   94: 1270,  # good
+                   93: 1320,  # good
+                   92: 1335,  #
+                   91: 1345,  #
+                   90: 1355,  # good
+                   89: 1370,  #
+                   88: 1390,  #
+                   87: 1420,  # good
+                   86: 1470,  # good
+                   85: 1530,  # good
+                   84: 1580,  # good
+                   83: 1605,  # good
+                   82: 1630,  # good
+                   81: 1660,  # good
+                   80: 1690,  # good
+                   79: 1720,  # good
+                   78: 1790,  # good
+                   77: 1815,  # good
+                   76: 1825,  # good
+                   75: 1840,  # good
+                   74: 1870,  #
+                   73: 1900,  # good
+                   72: 1915,  # good
+                   71: 1925,  # good
+                   70: 1935,  #
+                   69: 1950,  # good
+                   68: 1990,  # good
+        }
+
+        if self.STV == 1:
+            newInput = str("<"+str(self.STV)+","+str(self.BPV)+","+str(self.RST)+","+str(round(newFS,2))+","+str(tempMap[int(Controller.TS)])+">")
+        else:
+            newInput = str("<"+str(self.STV)+","+str(self.BPV)+","+str(self.RST)+","+str(0)+","+str(tempMap[int(Controller.TS)])+">")
+        print(newInput)
         board.write(newInput.encode())
         self.sendInputs = False
         self.RST = 0
@@ -417,6 +466,10 @@ class Controller(TabbedPanel):
     def startShower(self):
         self.STV = 1
         self.BPV = 0
+        print(Controller.FS)
+        # Controller.FS = self.flow_slider.value # resets flow setting to current value upon start
+        self.flow_slider.on_touch_up()
+        print(Controller.FS)
         if self.timer_initial == 0:
             self.timer_initial = datetime.now() # sets initial interval time
             self.shower_time_start = datetime.now() # save the start time
